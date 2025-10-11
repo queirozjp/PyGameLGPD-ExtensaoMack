@@ -1,3 +1,3 @@
-## PyGame LGPD - Projeto Extensionista Mackenzie
-# Desenvolvido por: João Pedro Queiroz de Andrade
+# PyGame LGPD - Projeto Extensionista Mackenzie
+### Desenvolvido por: João Pedro Queiroz de Andrade
 Simulador de decisões sobre privacidade e conformidade de IA com a LGPD, no contexto de uma empresa de marketing digital que utiliza inteligência artificial para analisar o comportamento online de clientes e criar campanhas personalizadas.
