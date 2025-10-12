@@ -74,11 +74,50 @@ decision10 = pygame.image.load("Images\game10.png").convert()
 decision10 = pygame.transform.scale(decision10,
                                     (decision10.get_width() * 0.697350,
                                      decision10.get_height() * 0.78125))
+final1 = pygame.image.load("Images\guardiao.png")
+final1 = pygame.transform.scale(final1,
+                                    (final1.get_width() * 0.697350,
+                                     final1.get_height() * 0.78125))
+final2 = pygame.image.load("Images\gestor.png")
+final2 = pygame.transform.scale(final2,
+                                    (final2.get_width() * 0.697350,
+                                     final2.get_height() * 0.78125))
+final3 = pygame.image.load("Images\descuidado.png")
+final3 = pygame.transform.scale(final3,
+                                    (final3.get_width() * 0.697350,
+                                     final3.get_height() * 0.78125))
+final4 = pygame.image.load("Images\\risco.png")
+final4 = pygame.transform.scale(final4,
+                                    (final4.get_width() * 0.697350,
+                                     final4.get_height() * 0.78125))
+final5 = pygame.image.load("Images\\vazador.png")
+final5 = pygame.transform.scale(final5,
+                                    (final5.get_width() * 0.697350,
+                                     final5.get_height() * 0.78125))
+
+
+
+option = pygame.image.load("Images\opt1.png").convert()
+option = pygame.transform.scale(option,
+                                    (option.get_width() / 5,
+                                     option.get_height() / 5))
+optionPressed = pygame.image.load("Images\opt2.png").convert()
+optionPressed = pygame.transform.scale(optionPressed,
+                                    (optionPressed.get_width() / 5,
+                                     optionPressed.get_height() / 5))
+
+
+
+
 # -------- Historia ---------
 stories = [story1, story2]
 
 # -------- Decisões ---------
 decisions = [decision1, decision2, decision3, decision4, decision5, decision6, decision7, decision8, decision9, decision10]
+optaRectangle = pygame.Rect(20, 480, 95, 50)
+optbRectangle = pygame.Rect(20, 560, 95, 50)
+optcRectangle = pygame.Rect(20, 650, 95, 50)
+optionAnimation = 200
 
 # -------- Botões ---------
 startAnimation = 200
@@ -96,13 +135,24 @@ chrtTimer = pygame.time.get_ticks()
 
 running = True
 started = False
-clicked = False
+menu = False
+play = False
 animating = False
 
-def buttonAnimation(currentTime, timer, start):
-    if clicked and currentTime - timer > start:
-            return False
+def startButtonAnimation(currentTime, timer, start):
+    if menu and currentTime - timer < start:
+            screen.blit(background, (0,0))
+            screen.blit(startan, (130,650))
+            return True
+    return False
     
+def decisionButtonAnimation(currentTime, timer, start, background, y):
+    if play and currentTime - timer < start:
+            screen.blit(background, (0,0))
+            screen.blit(player2, (20,160))
+            screen.blit(optionPressed, (20,y))
+            return True
+    return False
 
 def characterAnimation(startAn, anDur, anSpeed, chrtTimer, currentFrame, animating):
     currentTime = pygame.time.get_ticks()
@@ -116,6 +166,10 @@ def characterAnimation(startAn, anDur, anSpeed, chrtTimer, currentFrame, animati
     
 story = False
 storyIndex = 0
+gameIndex = 0
+y = 0
+score = 0
+finalScreen = False
 
 while running:
     
@@ -123,32 +177,89 @@ while running:
         if event.type == pygame.QUIT:
             running = False
         if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
-            if buttonRect.collidepoint(event.pos):
+            if buttonRect.collidepoint(event.pos) and not play and not story:
                 print("Click")
-                startTimer = pygame.time.get_ticks()
                 started = True
-                clicked = True
+                menu = True
                 animating = True
+                story = True
+                startTimer = pygame.time.get_ticks()
                 startAn = pygame.time.get_ticks()
+            if continueRect.collidepoint(event.pos) and started and not play:
                 story = True
-            if continueRect.collidepoint(event.pos):
-                story = True
-                clicked = True 
                 animating = True
                 storyIndex += 1
+                startTimer = pygame.time.get_ticks()
                 startAn = pygame.time.get_ticks()
-            
+                print("Click")
+            if optaRectangle.collidepoint(event.pos) and not story and not menu:
+                play = True
+                gameIndex += 1
+                animating = True
+                y = 480
+                score += 10
+                startTimer = pygame.time.get_ticks()
+                startAn = pygame.time.get_ticks()
+            if optbRectangle.collidepoint(event.pos) and not story and not menu:
+                play = True
+                gameIndex += 1
+                animating = True
+                y = 560
+                score += 5
+                startTimer = pygame.time.get_ticks()
+                startAn = pygame.time.get_ticks()
+            if optcRectangle.collidepoint(event.pos) and not story and not menu:
+                play = True
+                gameIndex += 1
+                animating = True
+                y = 650
+                score -= 10
+                startTimer = pygame.time.get_ticks()
+                startAn = pygame.time.get_ticks()
+    
     screen.blit(background, (0,0))
     screen.blit(startbutton, (130,650))
     currentTime = pygame.time.get_ticks()
     if started:
-        if story:
-            clicked = buttonAnimation(currentTime, startTimer, startAnimation)
-            screen.blit(startan, (130,650))
-            screen.blit(stories[storyIndex],(0,0)) 
+        menu = startButtonAnimation(currentTime, startTimer, startAnimation)
+        if story and not menu:
+            if (storyIndex <= 1):
+                screen.blit(stories[storyIndex],(0,0))
+            else: 
+                story = False 
+                play = True
             if animating: 
                 currentFrame, chrtTimer, animating = characterAnimation(startAn, anDur, anSpeed, chrtTimer, currentFrame, animating)
             else: 
-                screen.blit(player2, (20,160))          
+                screen.blit(player2, (20,160)) 
+        if play and not story:
+            currentTime = pygame.time.get_ticks()
+            if (gameIndex <= 9):
+                screen.blit(decisions[gameIndex],(0,0))
+            else:
+                play = False
+                started = False
+                finalScreen = True
+            if animating: 
+                currentFrame, chrtTimer, animating = characterAnimation(startAn, anDur, anSpeed, chrtTimer, currentFrame, animating)
+            else: 
+                screen.blit(player2, (20,160))
+            screen.blit(option, (20,480))
+            screen.blit(option, (20,560))
+            screen.blit(option, (20,650))
+            if (gameIndex <= 9):
+                decisionButtonAnimation(currentTime, startTimer, optionAnimation, decisions[gameIndex], y)
+            print(score)
+    if finalScreen:
+        if score >= 90:
+            screen.blit(final1, (0,0))
+        elif score >= 70: 
+            screen.blit(final2, (0,0))
+        elif score >= 50: 
+            screen.blit(final3, (0,0))
+        elif score >= 30: 
+            screen.blit(final4, (0,0))
+        else:     
+            screen.blit(final5, (0,0))                
     pygame.display.flip()
     clock.tick(60)
