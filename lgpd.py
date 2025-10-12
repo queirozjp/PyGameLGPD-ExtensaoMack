@@ -14,10 +14,6 @@ startan = pygame.image.load("Images\startan.png").convert()
 startan = pygame.transform.scale(startan,
                                     (startan.get_width() / 8,
                                      startan.get_height() / 8))
-game = pygame.image.load("Images\gameplay.png").convert()
-game = pygame.transform.scale(game,
-                                    (game.get_width() * 0.697350,
-                                     game.get_height() * 0.78125))
 player1 = pygame.image.load("Images\player.png").convert_alpha()
 player1 = pygame.transform.scale(player1,
                                     (player1.get_width() / 3,
@@ -178,7 +174,6 @@ while running:
             running = False
         if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
             if buttonRect.collidepoint(event.pos) and not play and not story:
-                print("Click")
                 started = True
                 menu = True
                 animating = True
@@ -191,7 +186,6 @@ while running:
                 storyIndex += 1
                 startTimer = pygame.time.get_ticks()
                 startAn = pygame.time.get_ticks()
-                print("Click")
             if optaRectangle.collidepoint(event.pos) and not story and not menu:
                 play = True
                 gameIndex += 1
@@ -249,7 +243,6 @@ while running:
             screen.blit(option, (20,650))
             if (gameIndex <= 9):
                 decisionButtonAnimation(currentTime, startTimer, optionAnimation, decisions[gameIndex], y)
-            print(score)
     if finalScreen:
         if score >= 90:
             screen.blit(final1, (0,0))
