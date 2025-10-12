@@ -20,4 +20,6 @@ O GLOBO. Funcionário da BP diz que houve negligência da petroleira porque plat
 
 RAMOS, Marien. Uso de inteligência artificial aumenta e alcança 72% das empresas, diz pesquisa. CNN Brasil, 8 jun. 2024. Disponível em: https://www.cnnbrasil.com.br/economia/negocios/uso-de-inteligencia-artificial-aumenta-e-alcanca-72-das-empresas-diz-pesquisa/#goog_rewarded. Acesso em: 11 out. 2025.
 
-ECKSCHMIDT, Thomas. O único propósito de uma empresa é gerar lucro para os acionistas? MIT Sloan Review Brasil, 30 set. 2020. Disponível em: https://mitsloanreview.com.br/o-unico-proposito-de-uma-empresa-e-gerar-lucro-para-os-acionistas/. Acesso em: 11 out. 2025.
+ECKSCHMIDT, Thomas. O único propósito de uma empresa é gerar lucro para os acionistas? MIT Sloan Review Brasil, 30 set. 2020. Disponível em: https://mitsloanreview.com.br/o-unico-proposito-de-uma-empresa-e-gerar-lucro-para-os-acionistas/. Acesso em: 10 out. 2025.
+
+PYGAME. **Documentação oficial do Pygame**. Disponível em: https://www.pygame.org/docs/. Acesso em: 10 out. 2025.
