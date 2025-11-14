@@ -1,6 +1,8 @@
 # Projeto: Privacidade em Jogo - Projeto Extensionista Mackenzie
 
-# Desenvolvido por: João Pedro Queiroz de Andrade
+## Desenvolvido por: João Pedro Queiroz de Andrade
+
+[Importante: Como Tornar o Projeto Executável](#como-tornar-o-projeto-executavel)
 
 # Introdução 
 O interesse na utilização de Inteligência Artificial em grandes empresas tem aumentado expressivamente nos últimos anos. Portanto, é fato que a utilização desse tipo de tecnologia será amplamente aproveitada de diversas formas. No entanto, a partir de uma breve análise sobre a forma em que as grandes empresas se portam em relação a problemas de integridade e segurança das pessoas, podendo ser utilizado como exemplo a explosão da plataforma Deepwater Horizon em 2010 causada por negligência e pressão por redução de custos, é possível observar que a ideia antiquada de Milton Friedman que apresenta que o único objetivo de uma empresa é gerar lucro para seus acionistas ainda é uma realidade nos dias de hoje.
@@ -59,6 +61,50 @@ Após passar pelos 10 cenários de decisão (`gameIndex` > 9), o jogo transicion
 | **< 30** | `final5` | `Images\vazador.png` | **Vazador** (Não conformidade grave) |
 
 Essa mecânica de pontuação e finais permite que o projeto atinja seu objetivo de forma lúdica, ilustrando as consequências diretas das decisões do DPO no contexto da LGPD/GDPR.
+
+## Como Tornar o Projeto Executável
+
+O projeto utiliza a ferramenta **cx_Freeze** para criar um executável autônomo (standalone), que pode ser distribuído e executado em sistemas operacionais sem a necessidade de ter o Python ou o PyGame instalados.
+
+### Pré-requisitos
+
+Para gerar o executável, você precisará ter o Python instalado em seu sistema e o pacote `cx_Freeze`.
+
+1.  **Instalar `cx_Freeze`:**
+    ```bash
+    pip install cx_Freeze
+    ```
+
+### Geração do Executável
+
+Com o `setup.py` e o script principal (`lgpd.py`) no mesmo diretório, execute o seguinte comando no terminal:
+
+```bash
+python setup.py build
+```
+
+Este comando irá:
+1.  Compilar o script principal (`lgpd.py`).
+2.  Incluir a biblioteca `pygame` e todos os arquivos da pasta `Images` no pacote.
+3.  Criar uma pasta chamada `build` no diretório do projeto.
+
+### Execução do Jogo
+
+Após a conclusão do processo de `build`, o executável estará disponível dentro da pasta `build`.
+
+-   **No Windows:** O executável estará em `build\exe.win-amd64-3.x\lgpd.exe` (o nome exato da pasta pode variar dependendo da sua versão do Python e arquitetura).
+-   **No Linux/macOS:** O executável estará em um caminho similar, como `build/exe.linux-x86_64-3.x/lgpd`.
+
+Basta navegar até o diretório apropriado e executar o arquivo gerado.
+
+## Estrutura do Projeto
+
+O projeto depende da seguinte estrutura de arquivos:
+
+-   `lgpd.py`: O script principal do jogo (baseado no código Python fornecido anteriormente).
+-   `setup.py`: Arquivo de configuração para a criação do executável com `cx_Freeze`.
+-   `Images/`: Pasta contendo todas as imagens e assets do jogo (fundo, botões, personagens, telas de história e decisão).
+-   `README.md`: Este arquivo.
 
 # Bibliografia
 BRASIL. Lei n° 13.709, de 14 de agosto de 2018. Dispõe sobre a proteção de dados pessoais e altera a Lei n° 12.965, de 23 de abril de 2014 (Marco Civil da Internet). Diário Oficial da União: seção 1, Brasília, DF, ano 155, n. 157, p. 59-64, 15 ago. 2018. Disponível em: https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2018/lei/l13709.htm. Acesso em: 11 out. 2025.
