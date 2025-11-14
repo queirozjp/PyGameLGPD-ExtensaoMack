@@ -11,6 +11,55 @@ A partir dessas questões a Lei Geral de Proteção de Dados surgiu, tendo como 
 O projeto Privacidade em Jogo - Projeto Extensionista Mackenzie consiste em um simulador de decisões desenvolvido em python utilizando a biblioteca PyGame-CE, baseando-se no tema IA e a conformidade com a LGPD/GDPR. O jogador é o novo Encarregado de Proteção de Dados da Agência Quântica, uma empresa de marketing digital que utiliza inteligência artificial para analisar o comportamento de consumidores e prever tendências, então o jogador deve tomar diversas decisões em relação as ações irresponsáveis do último Encarregado que estava em sua posição anteriormente.
 O principal objetivo do projeto é apresentar situações reais e como as ações tomadas pela empresa em relação a essas situações podem afetar a confiança, segurança e privacidade das pessoas que se relacionam a essa empresa e quão prejudicial isso pode ser até mesmo para a própria empresa.
 
+# Implementação Técnica
+
+O simulador de decisões foi desenvolvido em **Python** utilizando a biblioteca **PyGame** [6], que fornece as ferramentas necessárias para a criação de jogos e aplicações multimídia. A estrutura do código é orientada a estados, gerenciando a transição entre as telas de **Menu**, **História**, **Jogo** (Decisões) e **Final**.
+
+## Estrutura e Componentes Visuais
+
+O jogo opera em uma tela de 500x800 pixels, e a interface é construída a partir do carregamento e manipulação de diversas imagens que representam os estados do jogo.
+
+| Componente | Arquivo de Imagem (Exemplo) | Função no Jogo |
+| :--- | :--- | :--- |
+| **Fundo do Menu** | `Images\menubackground.png` | Tela inicial e de fundo padrão. |
+| **Botões** | `Images\start.png`, `Images\opt1.png` | Botão de início e botões de opção para as decisões. |
+| **Personagem** | `Images\player.png`, `Images\player2.png` | Representação visual do Encarregado de Proteção de Dados, com animação simples. |
+| **História** | `Images\story1.png`, `Images\story2.png` | Telas estáticas que apresentam o contexto e a narrativa inicial. |
+| **Decisões** | `Images\game1.png` a `Images\game10.png` | Telas que apresentam os 10 cenários de decisão relacionados à LGPD/GDPR. |
+| **Finais** | `Images\guardiao.png` a `Images\vazador.png` | Telas que exibem o resultado final do jogador com base na pontuação. |
+
+Todas as imagens são carregadas e redimensionadas programaticamente para se ajustarem à tela e manterem a proporção visual, como visto nas linhas 5 a 103 do código.
+
+## Lógica de Jogo e Pontuação
+
+O jogo é dividido em três estados principais, controlados pelas variáveis booleanas `menu`, `story`, `play` e `finalScreen`.
+
+1.  **Menu:** Exibe o botão "Start". Ao clicar, o estado transiciona para a História.
+2.  **História:** Exibe as telas de `stories` (`story1`, `story2`). O jogador avança na história clicando no botão "Continuar" (`continueRect`).
+3.  **Jogo (Decisões):** O estado principal do simulador. O jogo itera sobre a lista de `decisions` (10 cenários). Para cada cenário, o jogador tem três opções de resposta, representadas pelos retângulos de colisão `optaRectangle`, `optbRectangle` e `optcRectangle`.
+
+A **pontuação** (`score`) do jogador é atualizada com base na opção escolhida, simulando o impacto de cada decisão na conformidade e segurança de dados da empresa:
+
+| Opção | Pontuação Adicionada | Implicação |
+| :--- | :--- | :--- |
+| **Opção A** (`optaRectangle`) | +10 pontos | Decisão mais favorável à conformidade e privacidade. |
+| **Opção B** (`optbRectangle`) | +5 pontos | Decisão intermediária ou de risco moderado. |
+| **Opção C** (`optcRectangle`) | -10 pontos | Decisão desfavorável ou de alto risco à conformidade e privacidade. |
+
+## Resultados e Finais
+
+Após passar pelos 10 cenários de decisão (`gameIndex` > 9), o jogo transiciona para a tela final, onde o resultado é determinado pela pontuação total acumulada. Existem cinco finais possíveis, cada um associado a uma imagem e um título que reflete o perfil do Encarregado de Proteção de Dados (DPO) que o jogador se tornou:
+
+| Pontuação (`score`) | Final | Imagem | Perfil do DPO |
+| :--- | :--- | :--- | :--- |
+| **≥ 90** | `final1` | `Images\guardiao.png` | **Guardião** (Excelência em conformidade) |
+| **≥ 70** | `final2` | `Images\gestor.png` | **Gestor** (Bom gerenciamento de riscos) |
+| **≥ 50** | `final3` | `Images\descuidado.png` | **Descuidado** (Risco moderado) |
+| **≥ 30** | `final4` | `Images\risco.png` | **Risco** (Alto risco de não conformidade) |
+| **< 30** | `final5` | `Images\vazador.png` | **Vazador** (Não conformidade grave) |
+
+Essa mecânica de pontuação e finais permite que o projeto atinja seu objetivo de forma lúdica, ilustrando as consequências diretas das decisões do DPO no contexto da LGPD/GDPR.
+
 # Bibliografia
 BRASIL. Lei n° 13.709, de 14 de agosto de 2018. Dispõe sobre a proteção de dados pessoais e altera a Lei n° 12.965, de 23 de abril de 2014 (Marco Civil da Internet). Diário Oficial da União: seção 1, Brasília, DF, ano 155, n. 157, p. 59-64, 15 ago. 2018. Disponível em: https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2018/lei/l13709.htm. Acesso em: 11 out. 2025.
 
