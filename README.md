@@ -2,7 +2,7 @@
 
 ## Desenvolvido por: João Pedro Queiroz de Andrade
 
-[Importante: Como Tornar o Projeto Executável](#como-tornar-o-projeto-executavel)
+[Importante: Como Tornar o Projeto Executável](#como-tornar-o-projeto-executável)
 
 # Introdução 
 O interesse na utilização de Inteligência Artificial em grandes empresas tem aumentado expressivamente nos últimos anos. Portanto, é fato que a utilização desse tipo de tecnologia será amplamente aproveitada de diversas formas. No entanto, a partir de uma breve análise sobre a forma em que as grandes empresas se portam em relação a problemas de integridade e segurança das pessoas, podendo ser utilizado como exemplo a explosão da plataforma Deepwater Horizon em 2010 causada por negligência e pressão por redução de custos, é possível observar que a ideia antiquada de Milton Friedman que apresenta que o único objetivo de uma empresa é gerar lucro para seus acionistas ainda é uma realidade nos dias de hoje.
